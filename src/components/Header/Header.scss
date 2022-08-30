@@ -1,0 +1,31 @@
+@use 'src/app/styles/colors' as colors;
+
+header {
+    background-color: colors.$background;
+    padding: 16px;
+    z-index: 2;
+}
+
+@media only screen and (max-width: 600px) {
+    header {
+        position: fixed;
+        top: 0;
+        width: calc(100% - 32px);
+    }
+}
+
+header>p {
+    font-family: 'Bungee';
+    line-height: 120%;
+    text-align: center;
+    color: colors.$text-dark;
+    margin: 0
+}
+
+header .small {
+    font-size: 1.5rem;
+}
+
+header .large {
+    font-size: 3rem;
+}

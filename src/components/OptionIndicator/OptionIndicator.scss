@@ -1,0 +1,20 @@
+@use 'src/app/styles/colors';
+
+.option-indicator {
+    min-height: 30px;
+    width: 30px;
+    border-radius: 2px;
+    border: 1px solid colors.$green2-dark;
+    background-color: colors.$green2-light;
+    box-shadow: -2px 2px colors.$green2-dark;
+    position: relative;
+    bottom: 2px;
+    left: 2px;
+
+    &.wrong {
+        border: 1px solid colors.$red-dark;
+        background-color: colors.$red-light;
+        box-shadow: -2px 2px colors.$red-dark;
+    }
+}
+

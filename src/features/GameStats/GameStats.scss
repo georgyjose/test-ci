@@ -1,0 +1,25 @@
+@use 'src/app/styles/colors';
+
+.share-btn-container {
+    display: flex;
+    padding: 24px 0;
+}
+
+.share-btn-container button {
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .share-btn-container {
+        position: fixed;
+        bottom: 0;
+        width: calc(100% - 48px);
+        max-width: 312px;
+    }
+}
+
+.attempt-indicator-container {
+    display: flex;
+    column-gap: 10px;
+    align-content: flex-start;
+}

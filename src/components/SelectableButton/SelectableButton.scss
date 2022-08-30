@@ -1,0 +1,76 @@
+@use 'src/app/styles/colors';
+
+.selectable-btn {
+    font-family: 'Noto Sans Malayalam';
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    color: #383838;
+    border-radius: 4px;
+    position: relative;
+    bottom: 4px;
+    left: 4px;
+}
+
+@mixin btnVariant($variant, $darkColor, $lightColor) {
+    .selectable-btn.#{$variant} {
+        box-shadow: -4px 4px $darkColor;
+        background-color: $lightColor;
+        border: 1px solid $darkColor;
+        color: black;
+        animation: btn-press-out-#{$variant} 100ms normal;
+    }
+
+    .selectable-btn.#{$variant}.active {
+        left: 0px;
+        bottom: 0px;
+        box-shadow: 0px 0px;
+        background-color: $darkColor;
+        color: white;
+        animation: btn-press-in-#{$variant} 100ms normal;
+    }
+
+    @keyframes btn-press-in-#{$variant} {
+        0% {
+            left: 4px;
+            bottom: 4px;
+            box-shadow: -4px 4px $darkColor;
+            color: black;
+            background-color: $lightColor;
+        }
+
+        100% {
+            left: 0px;
+            bottom: 0px;
+            box-shadow: 0px 0px;
+            color: white;
+            background-color: $darkColor;
+        }
+    }
+
+    @keyframes btn-press-out-#{$variant} {
+        0% {
+            left: 0px;
+            bottom: 0px;
+            box-shadow: 0px 0px;
+            color: white;
+            background-color: $darkColor;
+        }
+
+        100% {
+            left: 4px;
+            bottom: 4px;
+            box-shadow: -4px 4px $darkColor;
+            color: black;
+            background-color: $lightColor;
+        }
+    }
+}
+
+@include btnVariant('violet', colors.$violet-dark, colors.$violet-light);
+@include btnVariant('green', colors.$green-dark, colors.$green-light);
+@include btnVariant('blue', colors.$blue-dark, colors.$blue-light);
+@include btnVariant('yellow', colors.$yellow-dark, colors.$yellow-light);
+
+.selectable-btn:focus-visible {
+    outline: none;
+}

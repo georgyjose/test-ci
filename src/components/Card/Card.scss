@@ -1,0 +1,11 @@
+@use 'src/app/styles/colors';
+
+.eg-card {
+    background-color: colors.$card-body;
+    border: 1px solid colors.$card-border;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: 'Noto Sans Malayalam';
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}

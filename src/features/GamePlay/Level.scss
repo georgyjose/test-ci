@@ -1,0 +1,45 @@
+.level {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-bottom: 120px;
+}
+
+.question-container {
+    text-align: center;
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    flex-grow: 1;
+
+    & .option {
+        width: calc(50% - 12px);
+        text-align: start;
+        word-break: break-word;
+    }
+}
+
+
+.action-btn-container {
+    display: flex;
+    padding: 24px 0;
+
+    button {
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .action-btn-container {
+        position: fixed;
+        bottom: 0;
+        width: calc(100% - 48px);
+        max-width: 312px;
+        background-color: white;
+    }
+
+}

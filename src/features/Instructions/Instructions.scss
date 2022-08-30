@@ -1,0 +1,15 @@
+@use 'src/app/styles/colors' as colors;
+
+.instructions {
+    border: 3px solid #F0F0F0;
+    color: colors.$text-dark;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.instructions button {
+    max-width: fit-content;
+    margin: auto;
+}
