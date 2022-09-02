@@ -17,6 +17,9 @@ build:
 pages:
   image: alpine:latest
   stage: deploy
+  variables: 
+    # Replace this with your site URL
+    PUBLIC_URL: https://entri.gitlab.io/entri-game/
   variables:
     GIT_STRATEGY: none        # Do not clone git repo
   script:
