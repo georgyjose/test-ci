@@ -15,6 +15,11 @@
         bottom: 0;
         width: calc(100% - 48px);
         max-width: 312px;
+        z-index: 13;
+    }
+
+    .download-btn-container {
+        padding-bottom: 103px;
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren, useState } from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 
 import './SelectableButton.scss';

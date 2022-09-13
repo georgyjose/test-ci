@@ -48,6 +48,16 @@ export const getDataForSharing = (options: GamePlayState.Option[]) => {
 }
 
 
+const formattedTimeInWords = (timeTaken: number) => {
+    const duration = intervalToDuration({ start: 0, end: timeTaken * 1000 })
+    let timeInWords = ''
+    if (duration.hours) timeInWords += duration.hours + ' hours '
+    if (duration.minutes) timeInWords += duration.minutes + ' minutes '
+    if (duration.seconds) timeInWords += duration.seconds + ' seconds '
+    return timeInWords
+}
+
+
 export const shareAttemptData = (
     quizId: number,
     userAttemptData: GamePlayState.AttemptData[],
@@ -65,18 +75,20 @@ export const shareAttemptData = (
         )
     }
 
-    const duration = intervalToDuration({ start: 0, end: timeTaken * 1000 })
-    const formattedTime = `${duration.minutes}:${duration.seconds}`
+
     const formattedDate = format(new Date(), 'dd/MM/yyyy')
 
-    let textToShare = `#Day${quizId} ${formattedDate}\n${formattedTime} \n`
+    let textToShare = `#Day${quizId} ${formattedDate} \n`
     userAttemptData.forEach((userData) => {
         const line = getDataForSharing(userData.selectedOptions)
         if (line.length)
-            textToShare = textToShare.concat(getDataForSharing(userData.selectedOptions) + '\n')
+            textToShare += getDataForSharing(userData.selectedOptions) + '\n'
     })
 
-    textToShare = textToShare.concat('\nhttps://playground.entri.app')
+    textToShare += '\nTime spent: '
+    textToShare += formattedTimeInWords(timeTaken)
+    textToShare += '\nTry if you can do better than me.'
+    textToShare += '\nhttps://playground.entri.app'
 
     const shareData = { text: textToShare }
 

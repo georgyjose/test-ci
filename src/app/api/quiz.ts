@@ -3,8 +3,8 @@ import Quiz from "../model/Quiz";
 
 const quizzes: Quiz.RootObject[] = [
     {
-        date: '01/09/2022',
-        id: 1,
+        date: '15/09/2022',
+        id: 15,
         questions: [
             {
                 id: 1,
@@ -87,8 +87,8 @@ const quizzes: Quiz.RootObject[] = [
         targetAnswerId: 2,
     },
     {
-        date: '02/09/2022',
-        id: 2,
+        date: '09/09/2022',
+        id: 9,
         questions: [
             {
                 id: 1,
@@ -171,8 +171,8 @@ const quizzes: Quiz.RootObject[] = [
         targetAnswerId: 8,
     },
     {
-        date: '03/09/2022',
-        id: 3,
+        date: '13/09/2022',
+        id: 13,
         questions: [
             {
                 id: 1,
@@ -255,8 +255,8 @@ const quizzes: Quiz.RootObject[] = [
         targetAnswerId: 1,
     },
     {
-        date: '04/09/2022',
-        id: 4,
+        date: '11/09/2022',
+        id: 11,
         questions: [
             {
                 id: 1,
@@ -332,6 +332,342 @@ const quizzes: Quiz.RootObject[] = [
             },
         ],
         targetAnswerId: 2,
+    },
+    {
+        date: '12/09/2022',
+        id: 12,
+        questions: [
+            {
+                id: 1,
+                question: 'താഴെ തന്നിരിക്കുന്നവയിൽ ലോഹങ്ങൾ ഏവ?',
+                correctAnswers: [2, 5, 6, 9, 10],
+            },
+            {
+                id: 2,
+                question: 'താഴെ തന്നിരിക്കുന്നവയിൽ S ബ്ലോക്ക് മൂലകങ്ങൾ ഏവ?',
+                correctAnswers: [5, 6, 9, 10],
+            },
+            {
+                id: 3,
+                question: 'താഴെ തന്നിരിക്കുന്നവയിൽ ആൽക്കലൈൻ എർത്ത് മൂലകങ്ങൾ ഏവ?',
+                correctAnswers: [5, 6, 10],
+            },
+            {
+                id: 4,
+                question: 'അറ്റോമിക നമ്പർ 10ൽ കൂടിയ മൂലകങ്ങൾ?',
+                correctAnswers: [5, 10],
+            },
+            {
+                id: 5,
+                question: 'മനുഷ്യശരീരത്തിൽ ഏറ്റവും കൂടുതലായി കാണപ്പെടുന്ന മൂലകം?',
+                correctAnswers: [5],
+            },
+        ],
+        answerKeys: [
+            {
+                id: 1,
+                label: 'കാർബൺ',
+                btnVariant: 'violet',
+            },
+            {
+                id: 2,
+                label: 'അയൺ',
+                btnVariant: 'green',
+            },
+            {
+                id: 3,
+                label: 'ഹീലിയം',
+                btnVariant: 'blue',
+            },
+            {
+                id: 4,
+                label: 'ഫോസ്‌ഫറസ്‌',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 5,
+                label: 'കാൽസ്യം',
+                btnVariant: 'violet',
+            },
+            {
+                id: 6,
+                label: 'ബെറിലിയം',
+                btnVariant: 'green',
+            },
+            {
+                id: 7,
+                label: 'ക്ലോറിൻ',
+                btnVariant: 'blue',
+            },
+            {
+                id: 8,
+                label: 'ഓക്സിജൻ',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 9,
+                label: 'ലിഥിയം',
+                btnVariant: 'violet',
+            },
+            {
+                id: 10,
+                label: 'മഗ്നീഷ്യം',
+                btnVariant: 'green',
+            },
+        ],
+        targetAnswerId: 5,
+    },
+    {
+        date: '10/09/2022',
+        id: 10,
+        questions: [
+            {
+                id: 1,
+                question: 'UN ൽ വീറ്റോ അധികാരം ഉള്ള രാജ്യങ്ങൾ ഇവയിൽ ഏതൊക്കെ?',
+                correctAnswers: [1, 2, 3, 4, 5],
+            },
+            {
+                id: 2,
+                question: 'ഇവയിൽ NATO രാജ്യങ്ങൾ ഏതൊക്കെ?',
+                correctAnswers: [2, 3, 4, 5],
+            },
+            {
+                id: 3,
+                question: 'ഒന്നാം ലോകമഹായുദ്ധത്തിൽ,ത്രികക്ഷി സൗഹാർദ്ദ സഖ്യത്തിൽ (Triple  Entante ) ഉണ്ടായിരുന്ന രാജ്യങ്ങൾ?',
+                correctAnswers: [2, 3, 4],
+            },
+            {
+                id: 4,
+                question: '1904 ലെ ഒരു രഹസ്യ ഉടമ്പടി പ്രകാരം, ഒരു രാജ്യം മറ്റൊരു രാജ്യത്തിന് ഈജിപ്ത് വിട്ടുകൊടുത്തു ആഫ്രിക്കൻ രാജ്യമായ മൊറോക്കോ സ്വന്തമാക്കി.  പരാമർശിക്കുന്ന ആ രാജ്യങ്ങൾ ഏതൊക്കെ?',
+                correctAnswers: [2, 4],
+            },
+            {
+                id: 5,
+                question: 'ഇൻ്റർനാഷണൽ സോളാർ അലയൻസ്, കാലാവസ്ഥ വ്യതിയാനത്തിനെതിരെ ഇന്ത്യയുടേയും മറ്റൊരു രാജ്യത്തിൻ്റെയും കൂട്ടായ ശ്രമത്തിൻെറ ഫലമായി രൂപം കൊണ്ടതാണ്. ഏതാണ് ആ രാജ്യം?',
+                correctAnswers: [2],
+            },
+        ],
+        answerKeys: [
+            {
+                id: 1,
+                label: 'ചൈന',
+                btnVariant: 'violet',
+            },
+            {
+                id: 2,
+                label: 'ഫ്രാൻസ്',
+                btnVariant: 'green',
+            },
+            {
+                id: 3,
+                label: 'റഷ്യ',
+                btnVariant: 'blue',
+            },
+            {
+                id: 4,
+                label: 'UK',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 5,
+                label: 'അമേരിക്ക',
+                btnVariant: 'violet',
+            },
+            {
+                id: 6,
+                label: 'മംഗോളിയ',
+                btnVariant: 'green',
+            },
+            {
+                id: 7,
+                label: 'ജപ്പാൻ',
+                btnVariant: 'blue',
+            },
+            {
+                id: 8,
+                label: 'ഓസ്‌ട്രേലിയ',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 9,
+                label: 'ഇറാൻ',
+                btnVariant: 'violet',
+            },
+            {
+                id: 10,
+                label: 'ഉത്തര കൊറിയ',
+                btnVariant: 'green',
+            },
+        ],
+        targetAnswerId: 2,
+    },
+    {
+        date: '14/09/2022',
+        id: 14,
+        questions: [
+            {
+                id: 1,
+                question: 'താഴെ നൽകിയിരിക്കുന്ന സംസ്ഥാനങ്ങളിൽ ഏതാണ് അറബിക്കടലുമായി അതിർത്തി പങ്കിടുന്നത്?',
+                correctAnswers: [1, 2, 3, 6, 10],
+            },
+            {
+                id: 2,
+                question: 'താഴെ കൊടുത്തിരിക്കുന്ന സംസ്ഥാനങ്ങളിൽ നിന്ന് ഇന്ത്യയിലെ ഉയർന്ന മാനവിക വികസന സൂചികയുള്ള മികച്ച 4 സംസ്ഥാനങ്ങൾ കണ്ടെത്തുക?',
+                correctAnswers: [2, 3, 6, 10],
+            },
+            {
+                id: 3,
+                question: 'താഴെ പറയുന്ന സംസ്ഥാനങ്ങളിൽ നിന്ന് ഏറ്റവും കൂടുതൽ കാപ്പി ഉത്പാദിപ്പിക്കുന്ന മൂന്ന് ദക്ഷിണേന്ത്യൻ സംസ്ഥാനങ്ങൾ കണ്ടെത്തുക?',
+                correctAnswers: [2, 6, 10],
+            },
+            {
+                id: 4,
+                question: 'ഭവാനി നദി താഴെപ്പറയുന്നവയിൽ ഏത് സംസ്ഥാനത്തിലൂടെയാണ് ഒഴുകുന്നത്?',
+                correctAnswers: [2, 6],
+            },
+            {
+                id: 5,
+                question: 'ഇന്ത്യയിൽ ഏറ്റവും കൂടുതൽ സാക്ഷരതാ നിരക്ക് ഉള്ള സംസ്ഥാനം?',
+                correctAnswers: [6],
+            },
+        ],
+        answerKeys: [
+            {
+                id: 1,
+                label: 'ഗുജറാത്ത്',
+                btnVariant: 'violet',
+            },
+            {
+                id: 2,
+                label: 'തമിഴ്‌നാട്',
+                btnVariant: 'green',
+            },
+            {
+                id: 3,
+                label: 'മഹാരാഷ്ട്ര',
+                btnVariant: 'blue',
+            },
+            {
+                id: 4,
+                label: 'രാജസ്ഥാൻ',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 5,
+                label: 'ആന്ധ്രാപ്രദേശ്',
+                btnVariant: 'violet',
+            },
+            {
+                id: 6,
+                label: 'കേരളം',
+                btnVariant: 'green',
+            },
+            {
+                id: 7,
+                label: 'ആസാം',
+                btnVariant: 'blue',
+            },
+            {
+                id: 8,
+                label: 'ഒഡിഷ',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 9,
+                label: 'പശ്ചിമബംഗാൾ',
+                btnVariant: 'violet',
+            },
+            {
+                id: 10,
+                label: 'കർണാടക',
+                btnVariant: 'green',
+            },
+        ],
+        targetAnswerId: 6,
+    },
+    {
+        date: '08/09/2022',
+        id: 8,
+        questions: [
+            {
+                id: 1,
+                question: 'താഴെ നൽകിയിരിക്കുന്ന നദികളിൽ ഏതാണ് ഉപദ്വീപ് നദികൾ?',
+                correctAnswers: [1, 2, 4, 6, 8],
+            },
+            {
+                id: 2,
+                question: 'താഴെ നൽകിയിരിക്കുന്ന നദികളിൽ ഏതാണ് ബംഗാൾ ഉൾക്കടലിലേക്ക് ഒഴുകുന്നത്?',
+                correctAnswers: [1, 2, 4, 6],
+            },
+            {
+                id: 3,
+                question: 'താഴെ നൽകിയിരിക്കുന്ന നദികളിൽ ഏതാണ് പശ്ചിമഘട്ടത്തിൽ നിന്ന് ഉത്ഭവിക്കുന്നത്?',
+                correctAnswers: [1, 2, 6],
+            },
+            {
+                id: 4,
+                question: 'താഴെ കൊടുത്തിരിക്കുന്ന നദികളിൽ ഏതൊക്കെ നദികൾക്കിടയിലാണ് കൊല്ലേരു തടാകം സ്ഥിതി ചെയ്യുന്നത്?',
+                correctAnswers: [1, 2],
+            },
+            {
+                id: 5,
+                question: 'താഴെ നൽകിയിരിക്കുന്ന നദികളിൽ നിന്ന് ഏത് നദിയാണ് ദക്ഷിണ ഗംഗ എന്നറിയപ്പെടുന്നത്?',
+                correctAnswers: [1],
+            },
+        ],
+        answerKeys: [
+            {
+                id: 1,
+                label: 'ഗോദാവരി',
+                btnVariant: 'violet',
+            },
+            {
+                id: 2,
+                label: 'കൃഷ്ണ',
+                btnVariant: 'green',
+            },
+            {
+                id: 3,
+                label: 'ഭഗീരഥി',
+                btnVariant: 'blue',
+            },
+            {
+                id: 4,
+                label: 'മഹാനദി',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 5,
+                label: 'അളകനന്ദ',
+                btnVariant: 'violet',
+            },
+            {
+                id: 6,
+                label: 'കാവേരി',
+                btnVariant: 'green',
+            },
+            {
+                id: 7,
+                label: 'ചെനാബ്',
+                btnVariant: 'blue',
+            },
+            {
+                id: 8,
+                label: 'നർമദ',
+                btnVariant: 'yellow',
+            },
+            {
+                id: 9,
+                label: 'സിന്ധു',
+                btnVariant: 'violet',
+            },
+            {
+                id: 10,
+                label: 'ബീസ്',
+                btnVariant: 'green',
+            },
+        ],
+        targetAnswerId: 1,
     },
 ]
 

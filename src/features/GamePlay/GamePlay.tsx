@@ -7,6 +7,7 @@ import { buttonVariants } from "../../components/SelectableButton/SelectableButt
 import GameStats from "../GameStats/GameStats";
 import Level from "./Level";
 import GamePlayState from "./models";
+import { sendMoengageEvent } from "../../app/tracker/moengage";
 
 interface GamePlayProps {
     quiz: Quiz.RootObject
@@ -50,6 +51,7 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
 
     const handleNextQuestion = (selectedOptions: number[]) => {
         const gameStatusToStore = {
+            quizId,
             gameStatus,
             userAttemptData: [
                 ...userAttemptData,
@@ -66,11 +68,13 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
         // Proceed only if all options are correct
         if (areEqual(selectedOptions, questions[activeQuestionIndex].correctAnswers)) {
             if (selectedOptions.length === 1) {
+                sendMoengageEvent('Entri Game Finish', { question_number: activeQuestionIndex + 1 })
                 setGameStatus('WON')
                 gameStatusToStore.gameStatus = 'WON'
             }
             setActiveQuestionIndex((currentValue) => currentValue + 1)
         } else {
+            sendMoengageEvent('Entri Game Finish', { question_number: activeQuestionIndex + 1 })
             setGameStatus('FAILED')
             gameStatusToStore.gameStatus = 'FAILED'
             gameStatusToStore.userAttemptData.push(...questionsNotAttempted(activeQuestionIndex + 1))
