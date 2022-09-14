@@ -12,7 +12,7 @@ build:
     - CI=false yarn build
   artifacts:
     paths:
-      - build
+      - build/
 
 pages:
   image: alpine:latest
@@ -27,4 +27,4 @@ pages:
     - mv build public         
   artifacts:
     paths:
-      - public
+      - public/
