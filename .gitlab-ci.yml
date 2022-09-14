@@ -9,7 +9,7 @@ build:
   stage: build
   script:
     - yarn install      
-    - CI=false yarn build
+    - CI=false yarn build:prod
   artifacts:
     paths:
       - build/
