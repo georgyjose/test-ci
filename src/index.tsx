@@ -8,6 +8,10 @@ import App from './App';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+window.moe?.({
+  app_id: process.env.REACT_APP_MOENGAGE_ACCOUNT_ID,
+  debug_logs: process.env.REACT_APP_ENABLE_MOENGAGE_TEST || 1,
+});
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

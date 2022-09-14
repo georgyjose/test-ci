@@ -3,6 +3,7 @@ import './Home.scss';
 import { getTodaysQuiz } from '../app/api/quiz';
 import Quiz from '../app/model/Quiz';
 import GamePlay from './GamePlay/GamePlay';
+import { sendMoengageEvent } from '../app/tracker/moengage';
 
 function Home() {
 
@@ -11,6 +12,7 @@ function Home() {
 
   useEffect(() => {
     fetchTodaysQuiz()
+    sendMoengageEvent("Entri Game Visit");
   }, [])
 
   const fetchTodaysQuiz = async () => {

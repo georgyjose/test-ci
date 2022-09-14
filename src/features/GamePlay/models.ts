@@ -16,6 +16,7 @@ declare module GamePlayState {
     export type GameStatus = 'PLAYING' | 'WON' | 'FAILED';
 
     export interface Root {
+        quizId: number,
         date: string;
         gameStatus: GameStatus;
         timeTaken: number;

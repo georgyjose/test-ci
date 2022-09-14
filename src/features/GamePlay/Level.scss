@@ -1,8 +1,10 @@
+@use 'src/app/styles/colors';
+
 .level {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-bottom: 120px;
+    padding-bottom: 139px;
 }
 
 .question-container {
@@ -26,11 +28,34 @@
 
 .action-btn-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 24px 0;
+    gap: 16px;
 
     button {
         margin: auto;
     }
+
+    .attempt-progress {
+        font-family: 'Inter', sans-serif;
+        color: colors.$text-grey;
+        font-size: 0.875rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+
+        &.completed {
+            color: colors.$text-dark;
+        }
+
+        strong {
+            font-size: 1rem;
+            font-weight: 700;
+            color: colors.$text-dark;
+        }
+    }
+
 }
 
 @media only screen and (max-width: 600px) {

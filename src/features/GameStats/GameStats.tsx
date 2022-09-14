@@ -8,12 +8,25 @@ import EGButton from '../../components/Button/Button';
 import './GameStats.scss';
 import OptionIndicator from '../../components/OptionIndicator/OptionIndicator';
 import { useNavigate } from 'react-router-dom';
+import { sendMoengageEvent } from '../../app/tracker/moengage';
+import DownloadButton from '../../components/DownloadButton';
 
 interface GameStatsProps {
     quizId: number;
     gameStatus: GamePlayState.GameStatus;
     userAttemptData: GamePlayState.AttemptData[];
     timeTaken: number;
+}
+
+export const getQuestionAttemptIndicator = (selectedOptions: GamePlayState.Option[]) => {
+    return (
+        <div className='attempt-indicator-container'>
+            {selectedOptions.map((option) => {
+                if (!option.isSelected) return
+                return <OptionIndicator key={option.id} isWrong={!option.isCorrect} />
+            })}
+        </div>
+    )
 }
 
 const GameStats: React.FC<GameStatsProps> = ({
@@ -24,31 +37,16 @@ const GameStats: React.FC<GameStatsProps> = ({
 }) => {
     const navigate = useNavigate()
 
-    const getQuestionAttemptIndicator = (selectedOptions: GamePlayState.Option[]) => {
-        return (
-            <div className='attempt-indicator-container'>
-                {selectedOptions.map((option) => {
-                    if (!option.isSelected) return
-                    return <OptionIndicator key={option.id} isWrong={!option.isCorrect} />
-                })}
-            </div>
-        )
-    }
-
     const handleClickShare = () => {
+        sendMoengageEvent('Entri Game Score Share')
         shareAttemptData(quizId, userAttemptData, timeTaken)
     }
 
     const handleViewAnswers = () => {
+        sendMoengageEvent('Entri Game Answers View')
         navigate('/answers')
     }
 
-    const handleDownloadEntri = () => {
-        const win = window.open('https://play.google.com/store/apps/details?id=me.entri.entrime', '_blank');
-        if (win != null) {
-            win.focus();
-        }
-    }
 
     return (
         <>
@@ -74,17 +72,10 @@ const GameStats: React.FC<GameStatsProps> = ({
                     <ArrowRight height={20} />
                 </div>
             </EGSelectableButton>
-            <EGSelectableButton
-                variant='blue'
-                style={{ marginTop: 22 }}
-                onClick={handleDownloadEntri}
-            >
-                <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'start' }}>
-                    Download Entri app from Playstore for a better learning experience!
-                    {/* <a href='https://play.google.com/store/apps/details?id=me.entri.entrime&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a> */}
-                    <img style={{ margin: -6 }} width={120} alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' />
-                </div>
-            </EGSelectableButton>
+
+            <div className='download-btn-container'>
+                <DownloadButton />
+            </div>
 
             <div className='share-btn-container'>
                 <EGButton onClick={handleClickShare}>

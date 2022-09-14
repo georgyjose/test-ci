@@ -3,9 +3,10 @@ import { isEmpty } from "lodash";
 import GamePlayState from "./models";
 import EGCard from "../../components/Card/Card";
 import EGSelectableButton from "../../components/SelectableButton/SelectableButton";
+import EGButton from "../../components/Button/Button";
+import clsx from "clsx";
 
 import './Level.scss';
-import EGButton from "../../components/Button/Button";
 
 interface LevelProps {
     level: number;
@@ -67,6 +68,13 @@ const Level: React.FC<LevelProps> = ({
                 })}
             </div>
             <div className="action-btn-container">
+                <div className={clsx("attempt-progress", {
+                    'completed': selectedOptions.length === correctAnswerCount
+                })} >
+                    <strong>{selectedOptions.length}</strong>
+                    <span>/</span>
+                    {correctAnswerCount}
+                </div>
                 <EGButton
                     disabled={isEmpty(selectedOptions) || (selectedOptions.length !== correctAnswerCount)}
                     onClick={handleNextQuestion}
