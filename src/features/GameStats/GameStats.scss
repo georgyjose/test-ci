@@ -2,20 +2,30 @@
 
 .share-btn-container {
     display: flex;
-    padding: 24px 0;
+    margin-top: 30px;
 }
 
 .share-btn-container button {
     width: 100%;
 }
 
+.next-quiz-time {
+    width: 100%;
+    background-color: colors.$green-dark;
+    color: white;
+    text-align: center;
+    padding: 8px 0;
+}
+
 @media only screen and (max-width: 600px) {
     .share-btn-container {
+        max-width: 312px;
+    }
+
+    .next-quiz-time {
         position: fixed;
         bottom: 0;
-        width: calc(100% - 48px);
-        max-width: 312px;
-        z-index: 13;
+        left: 0;
     }
 
     .download-btn-container {

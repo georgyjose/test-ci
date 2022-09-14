@@ -25,14 +25,15 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
     useEffect(() => {
         const gameStateString = window.localStorage.getItem('game_state')
         if (gameStateString) {
-            const { gameStatus, userAttemptData, timeTaken, date } = JSON.parse(gameStateString) as GamePlayState.Root
+            const { gameStatus, userAttemptData, timeTaken, date, availableOptions } = JSON.parse(gameStateString) as GamePlayState.Root
             if (date === today) {
                 setGameStatus(gameStatus)
                 setUserAttemptData(userAttemptData)
                 setTime(timeTaken)
                 if (gameStatus === 'PLAYING') {
                     setActiveQuestionIndex(userAttemptData.length)
-                    const remaining = userAttemptData[userAttemptData.length - 1].selectedOptions.filter((option) => option.isSelected).map((option) => option.id)
+                    setAvailableOptions(availableOptions)
+                    const remaining = availableOptions.map((option) => option.id)
                     setRemainingOptions(remaining)
                 }
             }
@@ -66,6 +67,7 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
             ],
             timeTaken: time,
             date,
+            availableOptions: []
         }
 
         if (activeQuestionIndex !== questions.length - 1) {

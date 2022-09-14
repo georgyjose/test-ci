@@ -78,16 +78,18 @@ export const shareAttemptData = (
 
     const formattedDate = format(new Date(), 'dd/MM/yyyy')
 
-    let textToShare = `#Day${quizId} ${formattedDate} \n`
+    let textToShare = `Kerala PSC Daily Challenge - Day ${quizId}\n\n`
+    textToShare += 'എന്റെ ഈ സ്കോർ തകർക്കാൻ പറ്റുമോ സക്കീർ ഭായിക്ക്?\n\n'
+
     userAttemptData.forEach((userData) => {
         const line = getDataForSharing(userData.selectedOptions)
         if (line.length)
             textToShare += getDataForSharing(userData.selectedOptions) + '\n'
     })
 
-    textToShare += '\nTime spent: '
-    textToShare += formattedTimeInWords(timeTaken)
-    textToShare += '\nTry if you can do better than me.'
+    // textToShare += '\nTime spent: '
+    // textToShare += formattedTimeInWords(timeTaken)
+    textToShare += '\nഇന്നത്തെ ഗെയിം കളിക്കാൻ ഈ ലിങ്ക് ക്ലിക്ക് ചെയ്യൂ.'
     textToShare += '\nhttps://playground.entri.app'
 
     const shareData = { text: textToShare }

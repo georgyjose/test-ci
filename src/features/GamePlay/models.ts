@@ -20,7 +20,7 @@ declare module GamePlayState {
         gameStatus: GameStatus;
         timeTaken: number;
         userAttemptData: AttemptData[],
-        availableOptions?: Option[],
+        availableOptions: Option[],
     }
 }
 

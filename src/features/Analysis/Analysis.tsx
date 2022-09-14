@@ -10,7 +10,6 @@ import { isEmpty } from "lodash";
 import EGButton from "../../components/Button/Button";
 import { sendMoengageEvent } from "../../app/tracker/moengage";
 import { shareAttemptData } from "../../app/utils";
-import DownloadButton from "../../components/DownloadButton";
 
 import 'swiper/css';
 import 'swiper/scss/navigation';
@@ -88,18 +87,19 @@ const Analysis = () => {
     }
 
     return (
-        <div style={{ height: '100%' }}>
+        // <div style={{ height: '100%' }}>
             <Swiper
-                style={{ maxWidth: '100%' }}
+                className='swiper'
                 spaceBetween={50}
-                slidesPerView={1}
                 autoHeight
+                slidesPerView={1}
                 modules={[
                     Pagination,
                     Keyboard,
                     Mousewheel,
                 ]}
                 pagination={{
+                    clickable: true,
                     el: '.swiper-pagination',
                     type: 'bullets',
                 }}
@@ -123,19 +123,15 @@ const Analysis = () => {
                 <div className="swiper-pagination"></div>
             </Swiper>
 
-            <div className='download-btn-container'>
-                <DownloadButton />
-            </div>
-
-            <div className='share-btn-container'>
-                <EGButton
-                    onClick={handleClickShare}
-                    style={{ marginTop: 22 }}
-                >
-                    Share
-                </EGButton>
-            </div>
-        </div>
+            // {/* <div className='share-btn-container'>
+            //     <EGButton
+            //         onClick={handleClickShare}
+            //         style={{ marginTop: 22 }}
+            //     >
+            //         Share
+            //     </EGButton>
+            // </div> */}
+        // </div>
     );
 
 }
