@@ -12,6 +12,7 @@ declare module Quiz {
         id: number;
         label: string;
         btnVariant: ButtonVariant;
+        isCorrect?: boolean;
     }
 
     interface RootObject {

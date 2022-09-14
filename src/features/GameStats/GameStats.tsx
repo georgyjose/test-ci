@@ -50,9 +50,9 @@ const GameStats: React.FC<GameStatsProps> = ({
 
     return (
         <>
-            <p style={{ fontWeight: 500, fontFamily: 'Inter', textAlign: 'center', fontSize: '0.875rem' }}>{gameStatus === 'FAILED' ?
+            {/* <p style={{ fontWeight: 500, fontFamily: 'Inter', textAlign: 'center', fontSize: '0.875rem' }}>{gameStatus === 'FAILED' ?
                 'Uh-ohh you didn’t make it, keep up next time.' :
-                'Congrats'}!</p>
+                'Congrats'}!</p> */}
             <div style={{ margin: '0 auto' }}>
                 {userAttemptData.map((userAttemptLevel, index) => {
                     return (
