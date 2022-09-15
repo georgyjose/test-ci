@@ -61,6 +61,7 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
                     level: activeQuestionIndex,
                     question: questions[activeQuestionIndex].question,
                     selectedOptions: getAttemptDataWithCorrectAnswers(
+                        questions[activeQuestionIndex].id,
                         selectedOptions,
                         availableOptions)
                 }
@@ -93,13 +94,16 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
     }
 
     const getAttemptDataWithCorrectAnswers = (
+        questionId: number,
         selectedOptions: number[],
         options: GamePlayState.Option[]
     ) => {
+        const correctAnswers = questions.find((question) => question.id === questionId)!.correctAnswers
         return options.map((option) => {
             return {
                 ...option,
-                isSelected: selectedOptions.includes(option.id)
+                isSelected: selectedOptions.includes(option.id),
+                isCorrect: correctAnswers.includes(option.id)
             }
         })
     }

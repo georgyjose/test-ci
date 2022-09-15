@@ -78,8 +78,8 @@ export const shareAttemptData = (
 
     const formattedDate = format(new Date(), 'dd/MM/yyyy')
 
-    let textToShare = `Kerala PSC Daily Challenge - Day ${quizId}\n\n`
-    textToShare += 'എന്റെ ഈ സ്കോർ തകർക്കാൻ പറ്റുമോ സക്കീർ ഭായിക്ക്?\n\n'
+    let textToShare = `Kerala PSC Daily Game - Day ${quizId}\n\n`
+    // textToShare += 'എന്റെ ഈ സ്കോർ തകർക്കാൻ പറ്റുമോ സക്കീർ ഭായിക്ക്?\n\n'
 
     userAttemptData.forEach((userData) => {
         const line = getDataForSharing(userData.selectedOptions)
