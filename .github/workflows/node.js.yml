@@ -31,7 +31,10 @@ jobs:
       run: CI=false npm run build
 
     - name: Create 404 file
-      run: cat build/index.html
+      run: cp build/index.html build/404.html
+
+    - name: Cat
+      run: cat build/404.html
 
     - name: Deploy
       run: |
