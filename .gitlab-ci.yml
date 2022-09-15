@@ -10,6 +10,8 @@ build:
   script:
     - yarn install      
     - CI=false yarn build:prod
+    - modify-index
+    - copy-index
   artifacts:
     paths:
       - build/

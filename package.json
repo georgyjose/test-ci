@@ -28,7 +28,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:prod": "react-scripts build && sed -i \"s/\"\/\(?\\!>)/\"/g\" index.html && shx cp build/index.html build/404.html",
+    "build:prod": "react-scripts build",
+    "modify-index": "sed -i \"\" -e \"s/=\"\//=\"/g\" build/index.html",
+    "copy-index": "shx cp build/index.html build/404.html",
     "start:prod": "serve -s build -l 8000",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
