@@ -29,7 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:prod": "react-scripts build",
-    "modify-index": "sed -i 's/=\"\//=\"/g' build/index.html",
+    "modify-index": "sed -i \"\" -e 's/=\"\//=\"/g' build/index.html",
     "copy-index": "shx cp build/index.html build/404.html",
     "start:prod": "serve -s build -l 8000",
     "test": "react-scripts test",
