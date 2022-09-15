@@ -28,9 +28,10 @@ jobs:
       run: CI=false npm install
 
     - name: Build
-      run: |
-        CI=false npm run build
-        cp build/index.html build/404.html
+      run: CI=false npm run build
+
+    - name: Create 404 file
+      run: cp build/index.html build/404.html
 
     - name: Deploy
       run: |
