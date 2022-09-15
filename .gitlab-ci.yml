@@ -10,7 +10,7 @@ build:
   script:
     - yarn install      
     - CI=false yarn build:prod
-    - yarn copy-index
+    - cp build/index.html build/404.html
   artifacts:
     paths:
       - build/
