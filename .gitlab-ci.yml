@@ -10,6 +10,7 @@ build:
   script:
     - yarn install      
     - CI=false yarn build:prod
+    - sed -i "s/=\"\//=\"/g" build/index.html
     - cp build/index.html build/404.html
   artifacts:
     paths:
