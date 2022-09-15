@@ -12,6 +12,8 @@ build:
     - CI=false yarn build:prod
     - sed -i "s/=\"\//=\"/g" build/index.html
     - cp build/index.html build/404.html
+    - touch build/_redirects
+    - echo "* index.html *" >> build/_redirects
   artifacts:
     paths:
       - build/
