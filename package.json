@@ -34,7 +34,7 @@
       "test":"react-scripts test",
       "eject":"react-scripts eject",
       "predeploy":"CI=false npm run build",
-      "deploy":"CI=false gh-pages -d build"
+      "deploy":"CI=false gh-pages -d build && cp build/index.html build/404.html && echo \"referee.entri.team\" >> CNAME"
    },
    "eslintConfig":{
       "extends":[
