@@ -30,6 +30,9 @@ jobs:
     - name: Build
       run: CI=false npm run build
 
+    - name: Create CNAME
+      run: echo "referee.entri.team" >> CNAME
+
     - name: Deploy
       run: |
         git config --global user.name $user_name
