@@ -36,3 +36,26 @@
     }
 
 }
+
+.swiper {
+    max-width: 100%;
+
+    .swiper-wrapper {
+        height: unset;
+    }
+
+    .swiper-pagination {
+        position: static;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: colors.$green-dark;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .swiper-slide {
+        overflow-y: scroll;
+    }
+}

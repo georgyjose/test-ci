@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import GamePlayState from '../GamePlay/models';
 import { shareAttemptData, } from '../../app/utils';
 import EGSelectableButton from '../../components/SelectableButton/SelectableButton';
@@ -10,6 +10,7 @@ import OptionIndicator from '../../components/OptionIndicator/OptionIndicator';
 import { useNavigate } from 'react-router-dom';
 import { sendMoengageEvent } from '../../app/tracker/moengage';
 import DownloadButton from '../../components/DownloadButton';
+import { format, intervalToDuration, startOfDay } from 'date-fns';
 
 interface GameStatsProps {
     quizId: number;
@@ -36,6 +37,13 @@ const GameStats: React.FC<GameStatsProps> = ({
     timeTaken,
 }) => {
     const navigate = useNavigate()
+    const [time, setTime] = useState(new Date())
+
+    useEffect(() => {
+        const timer = setInterval(() => setTime(new Date()), 1000)
+
+        return () => clearInterval(timer)
+    }, [])
 
     const handleClickShare = () => {
         sendMoengageEvent('Entri Game Score Share')
@@ -47,12 +55,26 @@ const GameStats: React.FC<GameStatsProps> = ({
         navigate('/answers')
     }
 
+    function timeDifference(date1: Date, date2: Date) {
+        var difference = Math.trunc(date1.getTime() - date2.getTime() / 1000);
+        const formattedTime = format(difference, 'hh:MM:ss')
+        return formattedTime;
+    }
+
+    const getRemainingTime = useMemo(() => {
+        const tomorrow = new Date()
+        tomorrow.setDate(new Date().getDate() + 1)
+        const startOfTomorrow = startOfDay(tomorrow)
+        const difference = startOfTomorrow.getTime() - new Date().getTime();
+        const formattedTime = new Date(difference).toISOString().substr(11, 8)
+        return formattedTime
+    }, [time])
 
     return (
         <>
-            <p style={{ fontWeight: 500, fontFamily: 'Inter', textAlign: 'center', fontSize: '0.875rem' }}>{gameStatus === 'FAILED' ?
+            {/* <p style={{ fontWeight: 500, fontFamily: 'Inter', textAlign: 'center', fontSize: '0.875rem' }}>{gameStatus === 'FAILED' ?
                 'Uh-ohh you didn’t make it, keep up next time.' :
-                'Congrats'}!</p>
+                'Congrats'}!</p> */}
             <div style={{ margin: '0 auto' }}>
                 {userAttemptData.map((userAttemptLevel, index) => {
                     return (
@@ -62,9 +84,16 @@ const GameStats: React.FC<GameStatsProps> = ({
                     )
                 })}
             </div>
+
+            <div className='share-btn-container'>
+                <EGButton onClick={handleClickShare}>
+                    Share
+                </EGButton>
+            </div>
+
             <EGSelectableButton
                 variant='green'
-                style={{ marginTop: 30 }}
+                style={{ margin: '20px 0' }}
                 onClick={handleViewAnswers}
             >
                 <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -73,15 +102,11 @@ const GameStats: React.FC<GameStatsProps> = ({
                 </div>
             </EGSelectableButton>
 
-            <div className='download-btn-container'>
+            {/* <div className='download-btn-container'>
                 <DownloadButton />
-            </div>
+            </div> */}
 
-            <div className='share-btn-container'>
-                <EGButton onClick={handleClickShare}>
-                    Share
-                </EGButton>
-            </div>
+            <span className='next-quiz-time'>Next quiz in <strong>{getRemainingTime}</strong></span>
         </>
     )
 }

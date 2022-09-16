@@ -3,7 +3,6 @@ import Quiz from "../../app/model/Quiz";
 declare module GamePlayState {
 
     export interface Option extends Quiz.AnswerKey {
-        isCorrect?: boolean;
         isSelected?: boolean;
     }
 
@@ -13,7 +12,7 @@ declare module GamePlayState {
         selectedOptions: Option[];
     }
 
-    export type GameStatus = 'PLAYING' | 'WON' | 'FAILED';
+    export type GameStatus = 'PLAYING' | 'COMPLETED';
 
     export interface Root {
         quizId: number,
@@ -21,6 +20,7 @@ declare module GamePlayState {
         gameStatus: GameStatus;
         timeTaken: number;
         userAttemptData: AttemptData[],
+        availableOptions: Option[],
     }
 }
 

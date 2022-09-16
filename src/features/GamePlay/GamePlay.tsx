@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
-import { random, shuffle } from "lodash";
+import { shuffle } from "lodash";
 import Quiz from "../../app/model/Quiz";
-import { areEqual, intersection } from "../../app/utils";
-import { buttonVariants } from "../../components/SelectableButton/SelectableButton";
 import GameStats from "../GameStats/GameStats";
 import Level from "./Level";
 import GamePlayState from "./models";
@@ -18,22 +16,24 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
     const today = format(new Date(), 'dd/MM/yyyy')
 
     const [time, setTime] = useState(0)
-    const [gameStatus, setGameStatus] = useState('PLAYING')
+    const [gameStatus, setGameStatus] = useState<GamePlayState.GameStatus>('PLAYING')
     const [userAttemptData, setUserAttemptData] = useState<GamePlayState.AttemptData[]>([])
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(0)
     const [remainingOptions, setRemainingOptions] = useState(answerKeys.map(({ id }) => id))
+    const [availableOptions, setAvailableOptions] = useState<GamePlayState.Option[]>(answerKeys)
 
     useEffect(() => {
         const gameStateString = window.localStorage.getItem('game_state')
         if (gameStateString) {
-            const { gameStatus, userAttemptData, timeTaken, date } = JSON.parse(gameStateString) as GamePlayState.Root
+            const { gameStatus, userAttemptData, timeTaken, date, availableOptions } = JSON.parse(gameStateString) as GamePlayState.Root
             if (date === today) {
                 setGameStatus(gameStatus)
                 setUserAttemptData(userAttemptData)
                 setTime(timeTaken)
                 if (gameStatus === 'PLAYING') {
                     setActiveQuestionIndex(userAttemptData.length)
-                    const remaining = userAttemptData[userAttemptData.length - 1].selectedOptions.filter((option) => option.isSelected).map((option) => option.id)
+                    setAvailableOptions(availableOptions)
+                    const remaining = availableOptions.map((option) => option.id)
                     setRemainingOptions(remaining)
                 }
             }
@@ -49,65 +49,83 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
         return () => clearInterval(timer)
     }, [time, gameStatus])
 
+
     const handleNextQuestion = (selectedOptions: number[]) => {
-        const gameStatusToStore = {
+
+        const gameStatusToStore: GamePlayState.Root = {
             quizId,
             gameStatus,
             userAttemptData: [
                 ...userAttemptData,
                 {
-                    level: activeQuestionIndex + 1,
+                    level: activeQuestionIndex,
                     question: questions[activeQuestionIndex].question,
-                    selectedOptions: getAttemptDataWithCorrectAnswers(questions[activeQuestionIndex].id, selectedOptions),
-                },
+                    selectedOptions: getAttemptDataWithCorrectAnswers(
+                        questions[activeQuestionIndex].id,
+                        selectedOptions,
+                        availableOptions)
+                }
             ],
             timeTaken: time,
             date,
+            availableOptions: []
         }
 
-        // Proceed only if all options are correct
-        if (areEqual(selectedOptions, questions[activeQuestionIndex].correctAnswers)) {
-            if (selectedOptions.length === 1) {
-                sendMoengageEvent('Entri Game Finish', { question_number: activeQuestionIndex + 1 })
-                setGameStatus('WON')
-                gameStatusToStore.gameStatus = 'WON'
-            }
+        if (activeQuestionIndex !== questions.length - 1) {
+
+            const optionsForNextQuestion = getOptionsForNextQuestion(
+                activeQuestionIndex + 1,
+                questions[activeQuestionIndex + 1].id,
+                availableOptions
+            )
+            gameStatusToStore.availableOptions = optionsForNextQuestion
+            setRemainingOptions(optionsForNextQuestion.map((option) => option.id))
+            setAvailableOptions(optionsForNextQuestion)
             setActiveQuestionIndex((currentValue) => currentValue + 1)
         } else {
+            setGameStatus('COMPLETED')
+            gameStatusToStore.gameStatus = 'COMPLETED'
             sendMoengageEvent('Entri Game Finish', { question_number: activeQuestionIndex + 1 })
-            setGameStatus('FAILED')
-            gameStatusToStore.gameStatus = 'FAILED'
-            gameStatusToStore.userAttemptData.push(...questionsNotAttempted(activeQuestionIndex + 1))
         }
-        setRemainingOptions(selectedOptions)
-        window.localStorage.setItem('game_state', JSON.stringify(gameStatusToStore))
+
         setUserAttemptData(gameStatusToStore.userAttemptData)
+        window.localStorage.setItem('game_state', JSON.stringify(gameStatusToStore))
+
     }
 
-    const questionsNotAttempted = (fromIndex: number) => {
-        const questionsNotAttempted = []
-        for (let i = fromIndex; i < questions.length; i++) {
-            questionsNotAttempted.push({
-                level: i + 1,
-                question: questions[i].question,
-                selectedOptions: getAttemptDataWithCorrectAnswers(questions[i].id, []),
-            })
-        }
-        return questionsNotAttempted
-    }
-
-    const getAttemptDataWithCorrectAnswers = (questionId: number, selectedOptions: number[]) => {
+    const getAttemptDataWithCorrectAnswers = (
+        questionId: number,
+        selectedOptions: number[],
+        options: GamePlayState.Option[]
+    ) => {
         const correctAnswers = questions.find((question) => question.id === questionId)!.correctAnswers
-        const allSelectedAndCorrectOptions = Array.from(new Set([...selectedOptions, ...correctAnswers]))
-        return getOptions(allSelectedAndCorrectOptions).map((option) => {
+        return options.map((option) => {
             return {
-                id: option.id,
-                label: option.label,
-                isCorrect: correctAnswers.includes(option.id),
+                ...option,
                 isSelected: selectedOptions.includes(option.id),
-                btnVariant: buttonVariants[random(0, 4)],
+                isCorrect: correctAnswers.includes(option.id)
             }
         })
+    }
+
+    const getOptionsForNextQuestion = (
+        questionIndex: number,
+        questionId: number,
+        availableOptions: GamePlayState.Option[]) => {
+        const reduceCount = [0, 3, 2, 1, 1]
+        const correctAnswers = questions.find((question) => question.id === questionId)!.correctAnswers
+        const inCorrectAnswers = availableOptions.filter((option) => !correctAnswers.includes(option.id))
+        const shuffledIncorrect = shuffle(inCorrectAnswers).slice(0, inCorrectAnswers.length - reduceCount[questionIndex])
+
+        return [
+            ...getOptions(correctAnswers).map((option) => {
+                return {
+                    ...option,
+                    isCorrect: true,
+                }
+            }),
+            ...shuffledIncorrect,
+        ]
     }
 
     const getOptions = (selectedIds: number[]) => {
@@ -116,12 +134,8 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
         })
     }
 
-    function getCorrectAnswerCount(questionIndex: number, correctAnswers: number[]): number {
-        if (questionIndex === 0) {
-            return correctAnswers.length
-        }
-        const arrayIntersection = intersection(correctAnswers, questions[questionIndex - 1].correctAnswers)
-        return getCorrectAnswerCount(questionIndex - 1, arrayIntersection)
+    const getCorrectAnswerCount = (questionIndex: number) => {
+        return questions[questionIndex].correctAnswers.length
     }
 
     const optionsObject = useMemo(() => getOptions(shuffle(remainingOptions)), [remainingOptions])
@@ -134,12 +148,12 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
                     level={activeQuestionIndex + 1}
                     question={questions[activeQuestionIndex].question}
                     questionsCount={questions.length}
-                    correctAnswerCount={getCorrectAnswerCount(activeQuestionIndex, questions[activeQuestionIndex].correctAnswers)}
+                    correctAnswerCount={getCorrectAnswerCount(activeQuestionIndex)}
                     options={optionsObject}
                     onComplete={handleNextQuestion}
                 />
 
-            case 'FAILED':
+            case 'COMPLETED':
                 return <GameStats
                     quizId={quizId}
                     gameStatus={gameStatus}
@@ -147,13 +161,6 @@ const GamePlay: React.FC<GamePlayProps> = ({ quiz }) => {
                     timeTaken={time}
                 />
 
-            case 'WON':
-                return <GameStats
-                    quizId={quizId}
-                    gameStatus={gameStatus}
-                    userAttemptData={userAttemptData}
-                    timeTaken={time}
-                />
         }
     }
 
